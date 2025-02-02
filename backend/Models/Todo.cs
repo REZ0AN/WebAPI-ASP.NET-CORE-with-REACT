@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+
+namespace backend.Models
+{
     public class Todo
     {
         
@@ -22,3 +25,5 @@ using System.ComponentModel.DataAnnotations;
 
         public User? User { get; set; }
     }
+
+}

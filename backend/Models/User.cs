@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-    public class User
+
+
+namespace  backend.Models 
+{
+        public class User
     {
     
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -18,3 +22,4 @@ using System.ComponentModel.DataAnnotations;
         // Navigation property
         public List<Todo> Todos { get; set; } = new List<Todo>();
     }
+}
