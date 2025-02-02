@@ -7,3 +7,4 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 - [Initial Setup for Backend](./docs/initial-backend-setup.md)
 - [Data Models](./docs/data-models.md)
 - [Models Setup for Backend](./docs/models-setup-in-backend.md)
+- [Configure Entity Framework Core and set up the database connection for schema migration](./docs/Configure-Entity-Framework-Core-and-set-up-the-database-connection-for-schema-migration.md)
