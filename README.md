@@ -5,3 +5,5 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 ## Documentations
 
 - [Initial Setup for Backend](./docs/initial-backend-setup.md)
+- [Data Models](./docs/data-models.md)
+- [Models Setup for Backend](./docs/models-setup-in-backend.md)
