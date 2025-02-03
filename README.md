@@ -8,3 +8,5 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 - [Data Models](./docs/data-models.md)
 - [Models Setup for Backend](./docs/models-setup-in-backend.md)
 - [Configure Entity Framework Core and set up the database connection for schema migration](./docs/Configure-Entity-Framework-Core-and-set-up-the-database-connection-for-schema-migration.md)
+- [Controllers and how we define it in ASP.NET Core WebApi](./docs/ControllersAndHowWeDefineIt.md)
+- [Swagger and It's Configuration](./docs/AddingSwagger.md)

@@ -1,5 +1,17 @@
 # Data Models for ToDo Project
 
+## What Are Data Models?
+
+A data model is a class or interface that represents the structure of data in your application. It defines the properties (fields) that map to your database tables and objects used in the API.
+
+## Why Do We Need Data Models?
+
+- Define Database Structure → Models represent how data is stored in the database.
+- Encapsulate Data → They ensure that data is structured and handled consistently.
+- Enable Object-Relational Mapping (ORM) → Used with Entity Framework Core to map C# objects to database tables.
+- Maintain Separation of Concerns → Keep database logic separate from controllers and business logic.
+- Validation & Data Annotations → You can enforce rules like required fields, max length, etc.
+
 ## Overview
 
 In this project, I have two data models that represent the core entities of our ToDo application. These models are designed to handle the data structure and relationships between different entities.
