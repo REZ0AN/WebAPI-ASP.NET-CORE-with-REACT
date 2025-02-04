@@ -10,3 +10,4 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 - [Configure Entity Framework Core and set up the database connection for schema migration](./docs/Configure-Entity-Framework-Core-and-set-up-the-database-connection-for-schema-migration.md)
 - [Controllers and how we define it in ASP.NET Core WebApi](./docs/ControllersAndHowWeDefineIt.md)
 - [Swagger and It's Configuration](./docs/AddingSwagger.md)
+- [Data Transfer Object Define and Custom Mappers](./docs/DataTransferObjectsAndHowToDefineIt.md)

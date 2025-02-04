@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Mappers;
+
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("api/todo")]
-    public class TodoController : ControllerBase
+    [Route("api/user")]
+    public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public TodoController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -20,19 +17,19 @@ namespace backend.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var todos = _context.Todos.ToList().Select(todo => todo.ToTodoDto());
-            return Ok(todos);
+            var users = _context.Users.ToList()
+                                    .Select(user => user.ToUserDto());
+            return Ok(users);
         }
-
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] Guid id)
         {
-            var todo = _context.Todos.Find(id);
-            if (todo == null)
+            var user = _context.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return Ok(todo.ToTodoDto());
+            return Ok(user.ToUserDto());
         }
     }
 }
