@@ -48,5 +48,37 @@ namespace backend.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetById), new { id = todo.Id }, todo.ToTodoDto());
         }
+
+        // PUT /api/todo/update/{id}
+        [HttpPut("update/{id}")]
+        public IActionResult UpdateById([FromRoute] Guid id, [FromBody] UpdateTodoRequestDto updateTodoRequestDto)
+        {
+            var todo = _context.Todos.FirstOrDefault( todo => todo.Id == id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            todo.Title = updateTodoRequestDto.Title;
+            todo.Description = updateTodoRequestDto.Description;
+            todo.IsCompleted = updateTodoRequestDto.IsCompleted;
+            
+            _context.SaveChanges();
+            return Ok(todo.ToTodoDto());
+        }
+
+        // DELETE /api/todo/delete/{id}
+        [HttpDelete("delete/{id}")]
+        public IActionResult DeleteById([FromRoute] Guid id)
+        {
+            var todo = _context.Todos.FirstOrDefault(todo => todo.Id == id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+            _context.Todos.Remove(todo);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }

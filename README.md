@@ -12,3 +12,5 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 - [Swagger and It's Configuration](./docs/AddingSwagger.md)
 - [Data Transfer Object Define and Custom Mappers](./docs/DataTransferObjectsAndHowToDefineIt.md)
 - [Adding POST request handler and Issue Resolved](./docs/AddedPostControllersIssuesFound.md)
+
+- [Adding PUT and DELETE request handler](./docs/AddedUpdateAndDeleteControllers.md)

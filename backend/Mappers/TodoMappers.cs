@@ -30,5 +30,17 @@ namespace backend.Mappers
                 UserId = createTodoRequestDto.UserId
             };
         }
+
+
+        public static Todo ToTodoFromUpdateTodoRequestDto(this UpdateTodoRequestDto updateTodoRequestDto)
+        {
+            return new Todo
+            {
+                Title = updateTodoRequestDto.Title,
+                IsCompleted = updateTodoRequestDto.IsCompleted,
+                Description = updateTodoRequestDto.Description
+            };
+        }
+
     }
 }
