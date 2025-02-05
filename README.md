@@ -11,3 +11,4 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 - [Controllers and how we define it in ASP.NET Core WebApi](./docs/ControllersAndHowWeDefineIt.md)
 - [Swagger and It's Configuration](./docs/AddingSwagger.md)
 - [Data Transfer Object Define and Custom Mappers](./docs/DataTransferObjectsAndHowToDefineIt.md)
+- [Adding POST request handler and Issue Resolved](./docs/AddedPostControllersIssuesFound.md)

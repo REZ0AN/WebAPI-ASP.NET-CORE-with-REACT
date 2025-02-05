@@ -17,7 +17,7 @@ namespace  backend.Models
     
         public string Password { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation property
         public List<Todo> Todos { get; set; } = new List<Todo>();

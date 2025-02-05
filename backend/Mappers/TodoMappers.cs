@@ -20,5 +20,15 @@ namespace backend.Mappers
                 UserId = todoModel.UserId
             };
         }
+        public static Todo ToTodoFromTodoRequestDto(this CreateTodoRequestDto createTodoRequestDto)
+        {
+            return new Todo
+            {
+                Title = createTodoRequestDto.Title,
+                IsCompleted = createTodoRequestDto.IsCompleted,
+                Description = createTodoRequestDto.Description,
+                UserId = createTodoRequestDto.UserId
+            };
+        }
     }
 }

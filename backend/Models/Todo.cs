@@ -16,7 +16,7 @@ namespace backend.Models
         public string Title { get; set; }
         public bool IsCompleted { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
  
         // Foreign key
         public Guid? UserId { get; set; }

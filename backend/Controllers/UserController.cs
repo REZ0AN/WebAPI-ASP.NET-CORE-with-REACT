@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Mappers;
-
+using backend.DTOs.User;
 namespace backend.Controllers
 {
     [ApiController]
@@ -14,6 +14,7 @@ namespace backend.Controllers
             _context = context;
         }
 
+        // GET /api/user
         [HttpGet]
         public IActionResult Get()
         {
@@ -21,6 +22,9 @@ namespace backend.Controllers
                                     .Select(user => user.ToUserDto());
             return Ok(users);
         }
+
+        // GET /api/user/{id}
+
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] Guid id)
         {
@@ -30,6 +34,16 @@ namespace backend.Controllers
                 return NotFound();
             }
             return Ok(user.ToUserDto());
+        }
+
+        // POST /api/user/register
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] CreateUserRequestDto userRequestDto)
+        {
+            var user = userRequestDto.ToUserModelFromUserRequestDto();
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return CreatedAtAction(nameof(GetById), new { id = user.Id }, user.ToUserDto());
         }
     }
 }

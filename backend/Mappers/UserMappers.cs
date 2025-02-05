@@ -13,5 +13,13 @@ namespace backend.Mappers
                 CreatedAt = userModel.CreatedAt
             };
         }
+        public static User ToUserModelFromUserRequestDto(this CreateUserRequestDto userRequestDto)
+        {
+            return new User
+            {
+                Username = userRequestDto.Username,
+                Password = userRequestDto.Password
+            };
+        }
     }
 }
