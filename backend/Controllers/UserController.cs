@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Mappers;
 using backend.DTOs.User;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 namespace backend.Controllers
 {
     [ApiController]
@@ -16,19 +18,19 @@ namespace backend.Controllers
 
         // GET /api/user
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var users = _context.Users.ToList()
-                                    .Select(user => user.ToUserDto());
+            var users = await _context.Users.ToListAsync();
+            var userDtos =   users.Select(user => user.ToUserDto());
             return Ok(users);
         }
 
         // GET /api/user/{id}
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var user = _context.Users.Find(id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -38,11 +40,11 @@ namespace backend.Controllers
 
         // POST /api/user/register
         [HttpPost("register")]
-        public IActionResult Register([FromBody] CreateUserRequestDto userRequestDto)
+        public async Task<IActionResult> Register([FromBody] CreateUserRequestDto userRequestDto)
         {
             var user = userRequestDto.ToUserModelFromUserRequestDto();
             _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user.ToUserDto());
         }
     }
