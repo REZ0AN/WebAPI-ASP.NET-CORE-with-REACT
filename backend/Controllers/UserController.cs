@@ -1,26 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
-using backend.Data;
+using backend.Interfaces;
 using backend.Mappers;
 using backend.DTOs.User;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+
 namespace backend.Controllers
 {
     [ApiController]
     [Route("api/user")]
     public class UserController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public UserController(ApplicationDbContext context)
+        private readonly IUserRepository _repository;
+        public UserController(IUserRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET /api/user
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _repository.GetAllAsync();
             var userDtos =   users.Select(user => user.ToUserDto());
             return Ok(users);
         }
@@ -30,7 +29,7 @@ namespace backend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _repository.GetByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -42,9 +41,7 @@ namespace backend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] CreateUserRequestDto userRequestDto)
         {
-            var user = userRequestDto.ToUserModelFromUserRequestDto();
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var user = await _repository.CreateAsync(userRequestDto);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user.ToUserDto());
         }
     }

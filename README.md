@@ -16,4 +16,4 @@ In this `WebAPI-ASP.NET-Core-with-REACT` project, I aim to learn and work with t
 - [Adding PUT and DELETE request handler](./docs/AddedUpdateAndDeleteControllers.md)
 - [Blocking and Non-Blocking Code](./docs/NonBlockingCode.md)
 - [Asynchronous Programming with ASP.NET Core](./docs/AsyncAwait.md)
-
+- [Repository Pattern and Dependency Injections](./docs/RepositoryPatternAndDI.md)
