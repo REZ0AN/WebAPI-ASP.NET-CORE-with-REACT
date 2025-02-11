@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Mappers;
 using backend.DTOs.Todo;
+using Microsoft.EntityFrameworkCore;
 namespace backend.Controllers
 {
     [ApiController]
@@ -20,18 +21,19 @@ namespace backend.Controllers
 
         // GET /api/todo
         [HttpGet]
-        public IActionResult Get()
+        public async  Task<IActionResult> Get()
         {
-            var todos = _context.Todos.ToList().Select(todo => todo.ToTodoDto());
+            var todos =  await _context.Todos.ToListAsync();
+            var todoDtos = todos.Select(todo => todo.ToTodoDto());
             return Ok(todos);
         }
 
         // GET /api/todo/{id}
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var todo = _context.Todos.Find(id);
+            var todo =  await _context.Todos.FindAsync(id);
             if (todo == null)
             {
                 return NotFound();
@@ -41,19 +43,19 @@ namespace backend.Controllers
 
         // POST /api/todo/create
         [HttpPost("create")]
-        public IActionResult Create([FromBody] CreateTodoRequestDto createTodoRequestDto)
+        public  async Task<IActionResult> Create([FromBody] CreateTodoRequestDto createTodoRequestDto)
         {
             var todo = createTodoRequestDto.ToTodoFromTodoRequestDto();
             _context.Todos.Add(todo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = todo.Id }, todo.ToTodoDto());
         }
 
         // PUT /api/todo/update/{id}
         [HttpPut("update/{id}")]
-        public IActionResult UpdateById([FromRoute] Guid id, [FromBody] UpdateTodoRequestDto updateTodoRequestDto)
+        public async Task<IActionResult> UpdateById([FromRoute] Guid id, [FromBody] UpdateTodoRequestDto updateTodoRequestDto)
         {
-            var todo = _context.Todos.FirstOrDefault( todo => todo.Id == id);
+            var todo = await _context.Todos.FirstOrDefaultAsync( todo => todo.Id == id);
             if (todo == null)
             {
                 return NotFound();
@@ -63,21 +65,21 @@ namespace backend.Controllers
             todo.Description = updateTodoRequestDto.Description;
             todo.IsCompleted = updateTodoRequestDto.IsCompleted;
             
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(todo.ToTodoDto());
         }
 
         // DELETE /api/todo/delete/{id}
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteById([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteById([FromRoute] Guid id)
         {
-            var todo = _context.Todos.FirstOrDefault(todo => todo.Id == id);
+            var todo = await _context.Todos.FirstOrDefaultAsync(todo => todo.Id == id);
             if (todo == null)
             {
                 return NotFound();
             }
             _context.Todos.Remove(todo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
