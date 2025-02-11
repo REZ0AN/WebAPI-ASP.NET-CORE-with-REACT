@@ -75,6 +75,8 @@ public async Task<IActionResult> Create([FromBody] CreateTodoRequestDto createTo
     return CreatedAtAction(nameof(GetById), new { id = todo.Id }, todo.ToTodoDto());
 }
 ```
+Here, `Task<IActionResult>` the `Task<>` type is needed because this method is `asynchronous` and returns a `Task` that will eventually produce an `IActionResult`. `IActionResult` is the return type used in `ASP.NET` controllers to represent various `HTTP responses` (e.g., Ok, Created, BadRequest).
+
 # Why is Non-Blocking Code is Efficient?
 
 - A server can handle more requests using fewer threads.
