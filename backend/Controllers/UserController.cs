@@ -26,7 +26,7 @@ namespace backend.Controllers
 
         // GET /api/user/{id}
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var user = await _repository.GetByIdAsync(id);
@@ -41,6 +41,10 @@ namespace backend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] CreateUserRequestDto userRequestDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var user = await _repository.CreateAsync(userRequestDto);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user.ToUserDto());
         }

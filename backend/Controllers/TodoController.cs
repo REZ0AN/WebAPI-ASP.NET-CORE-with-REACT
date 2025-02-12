@@ -26,7 +26,7 @@ namespace backend.Controllers
 
         // GET /api/todo/{id}
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var todo =  await _repository.GetByIdAsync(id);
@@ -41,15 +41,25 @@ namespace backend.Controllers
         [HttpPost("create")]
         public  async Task<IActionResult> Create([FromBody] CreateTodoRequestDto createTodoRequestDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var todo = createTodoRequestDto.ToTodoFromTodoRequestDto();
             await _repository.CreateAsync(todo);
             return CreatedAtAction(nameof(GetById), new { id = todo.Id }, todo.ToTodoDto());
         }
 
         // PUT /api/todo/update/{id}
-        [HttpPut("update/{id}")]
+        [HttpPut("update/{id:guid}")]
         public async Task<IActionResult> UpdateById([FromRoute] Guid id, [FromBody] UpdateTodoRequestDto updateTodoRequestDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }   
+            
             var todo = await _repository.UpdateAsync(id, updateTodoRequestDto);
             if (todo == null)
             {
@@ -59,7 +69,7 @@ namespace backend.Controllers
         }
 
         // DELETE /api/todo/delete/{id}
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("delete/{id:guid}")]
         public async Task<IActionResult> DeleteById([FromRoute] Guid id)
         {
             var todo = await _repository.DeleteAsync(id);
